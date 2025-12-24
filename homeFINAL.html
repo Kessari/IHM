@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartBazaar DZ - Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    :root{
+        /* Theme aligned with Sign up */
+        --bg-main:#f4efff;
+        --card-bg:rgba(255,255,255,0.96);
+        --text-main:#1f1638;
+        --text-muted:#8b86aa;
+        --accent-start:#7b2ff7;
+        --accent-end:#f107a3;
+        --glass-border:rgba(230,225,255,0.85);
+
+        --primary:var(--accent-start);
+        --primary-dark:#4b2bb4;
+        --success:#16a34a;
+
+        --surface:#FFFFFF;
+        --surface-soft:#f7f1ff;
+
+        --radius-lg:24px;
+        --radius-md:16px;
+        --shadow-soft:0 14px 32px rgba(87,63,158,0.22);
+
+        --text-xs:.75rem;
+        --text-sm:.875rem;
+        --text-base:1rem;
+        --text-lg:1.125rem;
+        --text-xl:1.25rem;
+        --text-2xl:1.5rem;
+    }
+
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:'Poppins',sans-serif;
+        -webkit-tap-highlight-color:transparent;
+    }
+
+    html,body{
+        height:100%;
+    }
+
+    body{
+        min-height:100vh;
+        background:radial-gradient(circle at top,#e4d8ff,#f4efff);
+        color:var(--text-main);
+        position:relative;
+        overflow-x:hidden;
+    }
+
+    body::before,
+    body::after{
+        content:'';
+        position:fixed;
+        border-radius:999px;
+        filter:blur(40px);
+        opacity:0.8;
+        z-index:-1;
+    }
+    body::before{
+        width:260px;
+        height:260px;
+        background:radial-gradient(circle,
+            rgba(241,7,163,0.55),
+            rgba(123,47,247,0.25),
+            transparent 70%);
+        top:-60px;
+        left:-40px;
+    }
+    body::after{
+        width:280px;
+        height:280px;
+        background:radial-gradient(circle,
+            rgba(56,189,248,0.5),
+            rgba(123,47,247,0.2),
+            transparent 70%);
+        bottom:-80px;
+        right:-40px;
+    }
+
+    .mobile-app{
+        width:100%;
+        min-height:100vh;
+        background:linear-gradient(
+            180deg,
+            rgba(244,239,255,0.96) 0%,
+            rgba(247,241,255,0.98) 40%,
+            rgba(247,241,255,1) 100%
+        );
+        border-radius:0;
+        overflow-y:auto;
+        box-shadow:0 30px 80px rgba(148,140,200,0.35);
+        display:flex;
+        flex-direction:column;
+        position:relative;
+    }
+
+    /* ===== UNIFIED HEADER ===== */
+    .main-header {
+        height: 70px;
+        background: linear-gradient(90deg, rgba(255,255,255,0.98), rgba(250,245,255,0.98));
+        padding: 0 20px;
+        border-bottom: 1px solid rgba(123,47,247,0.15);
+        display: flex;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(16px) saturate(160%);
+        -webkit-backdrop-filter: blur(16px) saturate(160%);
+    }
+
+    /* Desktop Header Layout */
+    @media (min-width: 900px) {
+        .main-header {
+            justify-content: space-between; /* Center the logo */
+            position: relative;
+        }
+       
+        /* Left: Navigation links */
+        .nav-links {
+            position: absolute;
+            left: 40px;
+            display: flex;
+        }
+        /* Center: Logo */
+        .logo-section {
+    position: static;
+    transform: none;
+    margin: 0 auto;
+}
+        /* Right: Actions */
+        .header-actions {
+            position: absolute;
+            right: 40px;
+        }
+    }
+
+    /* Tablet: Hide Support to prevent overlap */
+    @media (min-width: 900px) and (max-width: 1100px) {
+        .nav-links {
+            gap: 18px;
+        }
+        .nav-link:nth-child(5) { /* Support */
+            display: none;
+        }
+    }
+
+    /* Mobile Header Layout */
+    @media (max-width: 899px) {
+        .main-header {
+            padding: 0 15px;
+            justify-content: space-between; /* For mobile: left, center, right */
+        }
+        /* Left: Categories button */
+        .mobile-header-left {
+            display: flex;
+            align-items: center;
+        }
+        .mobile-categories-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: rgba(244,239,255,0.95);
+            border: 1px solid rgba(197,181,255,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--accent-start);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .mobile-categories-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(148,140,200,0.5);
+        }
+        /* Center: Logo */
+        .logo-section {
+            position: static;
+            transform: none;
+        }
+        .logo-text {
+            font-size: 1.1rem; /* Smaller logo on mobile */
+        }
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            font-size: 16px;
+        }
+        /* Right: Notifications only */
+        .mobile-header-right {
+            display: flex;
+            align-items: center;
+        }
+        /* Hide on mobile */
+        .chatbot-btn,
+        .user-avatar {
+            display: none !important;
+        }
+        .mobile-menu-btn {
+            display: none; /* Hide old menu button */
+        }
+    }
+
+    /* NEW: Remove black box on desktop logo */
+    @media (min-width: 900px) {
+        .logo-section::before,
+        .logo-section::after {
+            display: none !important;
+        }
+        .logo-section {
+            background: none !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+    }
+
+    /* Logo Section */
+    .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Reduced gap */
+    }
+
+    .logo-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        box-shadow: 0 6px 16px rgba(123,47,247,0.3);
+    }
+
+    .logo-text {
+        font-size: 1.1rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: -0.5px;
+    }
+
+    /* Navigation Links - Desktop */
+    .nav-links {
+        display: none;
+        align-items: center;
+        gap: 28px;
+        font-size: var(--text-base);
+    }
+
+    @media (min-width: 900px) {
+        .nav-links {
+            display: flex;
+        }
+    }
+
+    .nav-link {
+        cursor: pointer;
+        color: var(--text-muted);
+        position: relative;
+        padding-bottom: 6px;
+        transition: color 0.2s;
+        font-weight: 500;
+        white-space: nowrap;
+    }
+    .nav-link:hover {
+        color: var(--accent-start);
+    }
+    .nav-link.active {
+        font-weight: 600;
+        color: var(--accent-start);
+    }
+    .nav-link.active::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 3px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+    }
+
+    /* Header Actions */
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px; /* Reduced gap */
+    }
+
+    /* Notification Button - Simplified */
+    .notif-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(244,239,255,0.95);
+        border: 1px solid rgba(197,181,255,0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        cursor: pointer;
+        color: var(--accent-start);
+        position: relative;
+        transition: all 0.2s;
+    }
+    .notif-btn::after {
+        content: '';
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #f97316;
+        box-shadow: 0 0 0 2px rgba(249,115,22,0.3);
+    }
+    .notif-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(148,140,200,0.5);
+    }
+
+    /* Enhanced Profile Avatar */
+    .user-avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 700;
+        box-shadow: 0 8px 20px rgba(123,47,247,.45);
+        cursor: pointer;
+    }
+
+    /* Mobile Side Menu */
+    .mobile-side-menu {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 280px;
+        height: 100vh;
+        background: rgba(255,255,255,0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        z-index: 1000;
+        padding: 80px 20px 20px;
+        transition: left 0.3s ease;
+        box-shadow: 10px 0 40px rgba(148,140,200,0.3);
+        border-right: 1px solid rgba(123,47,247,0.15);
+    }
+    .mobile-side-menu.active {
+        left: 0;
+    }
+    .mobile-nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .mobile-nav-link {
+        padding: 15px;
+        border-radius: 12px;
+        font-size: var(--text-base);
+        color: var(--text-muted);
+        font-weight: 500;
+        transition: all 0.2s;
+        cursor: pointer;
+    }
+    .mobile-nav-link:hover,
+    .mobile-nav-link.active {
+        background: rgba(123,47,247,0.08);
+        color: var(--accent-start);
+    }
+    .mobile-nav-link.active {
+        font-weight: 600;
+    }
+
+    /* Overlay for mobile menu */
+    .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(15,7,40,0.3);
+        backdrop-filter: blur(4px);
+        z-index: 999;
+        display: none;
+    }
+    .menu-overlay.active {
+        display: block;
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    main.home-page{
+        flex:1;
+        padding:22px 16px 32px;
+    }
+    @media(min-width:900px){
+        main.home-page{
+            padding:32px 40px 48px;
+        }
+    }
+    @media(min-width:1200px){
+        main.home-page{
+            padding:40px 60px 60px;
+        }
+    }
+
+    .home-shell{
+        max-width:1200px;
+        margin:0 auto;
+    }
+
+    .home-section{
+        margin-top:40px; /* Increased spacing */
+    }
+    .home-section:first-of-type{
+        margin-top:0;
+    }
+
+    /* ===== Search ===== */
+    .search-shell{
+        position:relative;
+        margin-bottom:28px;
+    }
+    .search-shell input{
+        width:100%;
+        border-radius:18px;
+        padding:12px 46px 12px 42px;
+        border:1px solid rgba(197,181,255,0.95);
+        background:rgba(255,255,255,0.98);
+        color:var(--text-main);
+        font-size:var(--text-sm);
+        outline:none;
+        box-shadow:0 8px 20px rgba(197,181,255,0.4); /* Lighter shadow */
+    }
+    .search-shell input::placeholder{
+        color:#a5a0d8;
+    }
+    .search-shell input:focus{
+        border-color:var(--accent-start);
+        box-shadow:0 0 0 2px rgba(123,47,247,0.35);
+        background:#ffffff;
+    }
+    .search-shell span.icon{
+        position:absolute;
+        left:12px;
+        top:50%;
+        transform:translateY(-50%);
+        font-size:16px;
+        opacity:.8;
+    }
+    .search-chat{
+        position:absolute;
+        right:8px;
+        top:50%;
+        transform:translateY(-50%);
+        width:28px;
+        height:28px;
+        border-radius:999px;
+        border:1px solid rgba(241,7,163,0.4);
+        background:linear-gradient(135deg,var(--accent-start),var(--accent-end));
+        color:#FFF;
+        font-size:15px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        cursor:pointer;
+        box-shadow:0 8px 18px rgba(241,7,163,0.55);
+    }
+
+    /* ===== Banner ===== */
+    .home-banner{
+        border-radius:var(--radius-lg);
+        padding:20px 22px 18px;
+        background:
+            radial-gradient(circle at top left,
+                rgba(123,47,247,0.16),
+                rgba(241,7,163,0.12),
+                rgba(255,255,255,0.95));
+        color:var(--text-main);
+        box-shadow:0 10px 25px rgba(148,140,200,0.4); /* Softer shadow */
+        margin-bottom:40px; /* Increased spacing */
+        position:relative;
+        overflow:hidden;
+        display:grid;
+        grid-template-columns:minmax(0,2.2fr) minmax(0,1.2fr);
+        gap:20px;
+        border:1px solid var(--glass-border);
+    }
+    .home-banner-main h3{
+        font-size:var(--text-2xl);
+        margin-bottom:8px;
+    }
+    .home-banner-main small{
+        font-size:var(--text-sm);
+        color:var(--text-main);
+        opacity:.96;
+        display:block;
+        margin-bottom:8px;
+    }
+    .home-banner-tag{
+        font-size:var(--text-xs);
+        color:var(--text-muted);
+        margin-top:8px;
+        line-height:1.5;
+    }
+    .home-banner-cta{
+        margin-top:18px;
+        display:inline-flex;
+        padding:10px 20px;
+        border-radius:999px;
+        background:#ffffff;
+        color:var(--accent-start);
+        font-size:var(--text-sm);
+        font-weight:600;
+        cursor:pointer;
+        box-shadow:0 10px 24px rgba(148,140,200,0.6);
+        border:1px solid rgba(230,225,255,0.9);
+    }
+    .home-banner-cta:hover{
+        transform:translateY(-2px);
+        box-shadow:0 14px 30px rgba(148,140,200,0.8);
+    }
+    .home-banner-visual{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+    .banner-orb{
+        width:104px;
+        height:104px;
+        border-radius:999px;
+        background:conic-gradient(from 220deg,
+            rgba(56,189,248,1),
+            rgba(241,7,163,1),
+            rgba(250,204,21,1),
+            rgba(56,189,248,1));
+        padding:3px;
+        box-shadow:0 12px 30px rgba(148,140,200,0.5); /* Softer shadow */
+        /* ❌ REMOVED SPINNING ANIMATION */
+    }
+    .banner-orb-inner{
+        width:100%;
+        height:100%;
+        border-radius:inherit;
+        background:radial-gradient(circle at top,#ffffff,#f4efff);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:42px;
+    }
+
+    /* ===== Section headers ===== */
+    .section-title{
+        font-size:var(--text-lg);
+        font-weight:600;
+        color:var(--text-main);
+    }
+    .section-header{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        margin-bottom:14px;
+    }
+    .section-header span{
+        font-size:var(--text-xs);
+        color:var(--accent-start);
+        cursor:pointer;
+        font-weight:500;
+    }
+
+    /* ===== Categories pills (glass) ===== */
+    .chips-row{
+        display:flex;
+        gap:20px;
+        overflow-x:auto;
+        padding-bottom:6px;
+        margin-bottom:22px;
+        scrollbar-width:none;
+    }
+    .chips-row::-webkit-scrollbar{display:none;}
+
+    /* Desktop Grid Layout */
+    @media (min-width: 900px) {
+        .chips-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            overflow: visible;
+        }
+        .pill {
+            justify-content: center;
+            padding: 14px 0;
+        }
+    }
+
+    .pill{
+        padding:10px 20px;
+        border-radius:18px;
+        border:1px solid rgba(230,225,255,0.9);
+        background:rgba(255,255,255,0.78);
+        backdrop-filter:blur(10px);
+        -webkit-backdrop-filter:blur(10px);
+        font-size:var(--text-xs);
+        font-weight:500;
+        color:var(--text-muted);
+        cursor:pointer;
+        white-space:nowrap;
+        transition:.18s;
+        display:flex;
+        align-items:center;
+        gap:6px;
+        box-shadow:0 8px 18px rgba(197,181,255,0.3);
+    }
+    .pill::before{
+        content:'•';
+        font-size:14px;
+        color:#a78bfa;
+    }
+    .pill:hover{
+        border-color:var(--accent-start);
+        color:var(--accent-start);
+        transform:translateY(-2px);
+    }
+    .pill.active{
+        background:linear-gradient(135deg,var(--accent-start),var(--accent-end));
+        color:#FDF4FF;
+        border-color:transparent;
+        box-shadow:0 14px 30px rgba(123,47,247,0.7);
+        backdrop-filter:none;
+    }
+    .pill.active::before{
+        color:#FACC15;
+    }
+
+    /* ===== Products grid ===== */
+    .card-grid{
+        display:grid;
+        grid-template-columns:1fr;
+        gap:18px;
+    }
+    @media (min-width: 640px){
+        .card-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+    @media (min-width: 900px){
+        .card-grid{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+    }
+    @media (min-width: 1200px){
+        .card-grid{ grid-template-columns:repeat(4,minmax(0,1fr)); }
+    }
+
+    .product-card{
+        border-radius:20px;
+        padding:14px;
+        background:var(--card-bg);
+        box-shadow:var(--shadow-soft);
+        border:1px solid rgba(230,225,255,0.95);
+        cursor:pointer;
+        transition:.18s;
+        display:flex;
+        flex-direction:column;
+        position:relative;
+        overflow:hidden;
+    }
+    .product-card::after{
+        content:'';
+        position:absolute;
+        inset:0;
+        background:radial-gradient(circle at top,
+            rgba(244,239,255,0.85),
+            transparent 60%);
+        opacity:0;
+        transition:.2s;
+        pointer-events:none;
+    }
+    .product-card:hover{
+        transform:translateY(-4px); /* Lighter hover */
+        box-shadow:0 20px 40px rgba(148,140,200,0.5);
+    }
+    .product-card:hover::after{
+        opacity:1;
+    }
+
+    .product-thumb{
+        border-radius:16px;
+        background:linear-gradient(145deg,#f4efff,#fdf2ff);
+        height:140px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        margin-bottom:12px;
+        position:relative;
+        overflow:hidden;
+    }
+    .product-image{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        border-radius:16px;
+    }
+    .badge{
+        position:absolute;
+        top:10px;
+        left:10px;
+        font-size:11px;
+        padding:4px 10px;
+        border-radius:999px;
+        background:rgba(123,47,247,0.96);
+        color:#F9F5FF;
+        font-weight:600;
+        z-index:2;
+    }
+
+    /* Discount Badge - NEW */
+    .discount-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #F43F5E;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 999px;
+        box-shadow: 0 6px 16px rgba(244,63,94,.45);
+        z-index: 2;
+    }
+
+    .product-title{
+        font-size:var(--text-base);
+        font-weight:600;
+        margin-bottom:6px;
+        color:var(--text-main);
+    }
+    .product-price{
+        font-size:var(--text-base);
+        font-weight:700;
+        color:var(--accent-start);
+        margin-bottom:8px;
+    }
+
+    .product-meta{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        margin-bottom:10px;
+        gap:8px;
+    }
+    .meta-left{
+        display:flex;
+        align-items:center;
+        gap:6px;
+        font-size:var(--text-sm);
+        color:var(--text-muted);
+    }
+    .meta-left .stars{
+        color:#FACC15;
+        font-size:12px;
+    }
+    .meta-left .rating-count{
+        color:#8f93ab;
+        font-size:12px;
+    }
+    .meta-right{
+        display:flex;
+        align-items:center;
+        gap:6px;
+    }
+    .chip-mini{
+        border-radius:999px;
+        padding:4px 10px;
+        font-size:11px;
+        display:inline-flex;
+        align-items:center;
+        gap:4px;
+        white-space:nowrap;
+        font-weight:500;
+    }
+    .chip-mini.verified{
+        background:#ECFEFF;
+        color:#0369A1;
+        border:1px solid #BAE6FD;
+    }
+
+    .product-actions{
+        display:flex;
+        gap:10px;
+        margin-top:8px;
+    }
+    .product-btn{
+        flex:1;
+        border-radius:999px;
+        padding:8px 10px;
+        font-size:var(--text-sm);
+        font-weight:600;
+        cursor:pointer;
+        border:1px solid rgba(230,225,255,0.95);
+        background:#FFF;
+        color:var(--text-muted);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:6px;
+        transition:all 0.2s;
+    }
+    .product-btn.primary{
+        background:linear-gradient(135deg,var(--success),#22c55e);
+        color:#FFF;
+        border:none;
+        box-shadow:0 10px 24px rgba(22,163,74,0.55);
+    }
+
+    /* Wishlist active state */
+    .product-btn.wishlist-active {
+        background: rgba(241,7,163,0.15);
+        border-color: var(--accent-end);
+        color: var(--accent-end);
+    }
+
+    /* PRO Glass Button (True Glassmorphism) */
+    .glass-btn{
+        background: rgba(255,255,255,0.18);
+        backdrop-filter: blur(14px) saturate(160%);
+        -webkit-backdrop-filter: blur(14px) saturate(160%);
+        border: 1px solid rgba(123,47,247,0.35);
+        color: var(--accent-start);
+        box-shadow:
+            inset 0 1px 1px rgba(255,255,255,0.6),
+            0 8px 20px rgba(123,47,247,0.25);
+    }
+    .glass-btn:hover{
+        background: rgba(255,255,255,0.28);
+        transform: translateY(-2px);
+    }
+
+    /* ===== Trust DZ ===== */
+    .trustdz-section{
+        margin-top:48px; /* Larger spacing */
+    }
+    .trustdz-card{
+        border-radius:24px;
+        padding:20px 22px;
+        background:rgba(255,255,255,0.98);
+        border:1px solid rgba(230,225,255,0.95);
+        box-shadow:0 12px 28px rgba(148,140,200,0.35); /* Softer shadow */
+        display:flex;
+        flex-direction:column;
+        gap:14px;
+    }
+    .trustdz-header{
+        display:flex;
+        align-items:center;
+        gap:12px;
+        flex-wrap:wrap;
+    }
+    .trustdz-icon{
+        width:36px;
+        height:36px;
+        border-radius:999px;
+        background:radial-gradient(circle,#22C55E,#16A34A);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        color:#F9FAFB;
+        font-size:20px;
+    }
+    .trustdz-title{
+        font-size:var(--text-base);
+        font-weight:600;
+        color:var(--text-main);
+    }
+    .trustdz-status{
+        font-size:var(--text-sm);
+        color:var(--text-muted);
+    }
+    .trustdz-text{
+        font-size:var(--text-sm);
+        color:var(--text-muted);
+        line-height:1.6;
+    }
+    .trustdz-meter{
+        width:100%;
+        height:8px;
+        border-radius:999px;
+        background:#E5E7EB;
+        overflow:hidden;
+        position:relative;
+    }
+    .trustdz-meter-fill{
+        width:82%;
+        height:100%;
+        background:linear-gradient(90deg,#22C55E,#A3E635,#FACC15);
+    }
+    .trustdz-bottom{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+        flex-wrap:wrap;
+    }
+    .trustdz-note{
+        font-size:var(--text-sm);
+        color:var(--text-muted);
+    }
+    .trustdz-btn{
+        padding:10px 18px;
+        border-radius:999px;
+        border:none;
+        cursor:pointer;
+        font-size:var(--text-sm);
+        font-weight:600;
+        background:linear-gradient(135deg,var(--accent-start),var(--accent-end));
+        color:#FFF;
+        box-shadow:0 10px 22px rgba(123,47,247,.55);
+    }
+
+    /* ===== Floating buttons ===== */
+    .floating-actions{
+        position: fixed;
+        right: 18px;
+        bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        z-index: 1000;
+    }
+
+    .fab-btn{
+        width:56px;
+        height:56px;
+        border-radius:50%;
+        border:none;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:22px;
+        cursor:pointer;
+        box-shadow:0 12px 28px rgba(0,0,0,0.25);
+    }
+    .fab-btn span{
+        display:none;
+    }
+
+    .fab-chat{
+        background:linear-gradient(135deg,#7b2ff7,#f107a3);
+        color:#fff;
+    }
+
+    .fab-cart{
+        background:linear-gradient(135deg,#16a34a,#22c55e);
+        color:#fff;
+    }
+
+    /* ===== Modal ===== */
+    .modal-backdrop{
+        position:fixed;
+        inset:0;
+        background:rgba(15,7,40,0.25);
+        display:none;
+        align-items:center;
+        justify-content:center;
+        z-index:80;
+        backdrop-filter:blur(10px);
+        -webkit-backdrop-filter:blur(10px);
+    }
+    .modal-backdrop.show{ display:flex; }
+    .modal-card{
+        background:rgba(255,255,255,0.98);
+        border-radius:24px;
+        padding:24px 22px 22px;
+        max-width:360px;
+        width:90%;
+        text-align:center;
+        box-shadow:0 24px 60px rgba(148,140,200,0.7);
+        border:1px solid var(--glass-border);
+    }
+    .modal-emoji{
+        font-size:48px;
+        margin-bottom:8px;
+    }
+    .modal-title{
+        font-size:var(--text-lg);
+        font-weight:600;
+        margin-bottom:6px;
+        color:var(--text-main);
+    }
+    .modal-price{
+        font-size:var(--text-base);
+        font-weight:700;
+        color:var(--accent-start);
+        margin-bottom:12px;
+    }
+    .modal-text{
+        font-size:var(--text-sm);
+        color:var(--text-muted);
+        margin-bottom:16px;
+        line-height:1.5;
+    }
+    .modal-btn{
+        width:100%;
+        padding:12px 16px;
+        border-radius:999px;
+        border:none;
+        cursor:pointer;
+        font-size:var(--text-base);
+        font-weight:600;
+        background:linear-gradient(135deg,var(--accent-start),var(--accent-end));
+        color:#FFF;
+        box-shadow:0 10px 24px rgba(123,47,247,.6);
+    }
+    .mobile-categories-btn{
+    display: none;
+}
+@media (max-width: 899px){
+    .mobile-categories-btn{
+        display: flex;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="mobile-app">
+
+    <!-- UNIFIED HEADER -->
+    <header class="main-header">
+        <!-- Mobile: Categories button (left) -->
+        <div class="mobile-header-left">
+            <button class="mobile-categories-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Center: Logo -->
+        <div class="logo-section">
+            <div class="logo-icon">🛍️</div>
+            <div class="logo-text">SmartBazaar</div>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <div class="nav-links">
+            <span class="nav-link active">Home</span>
+            <span class="nav-link">Categories</span>
+            <span class="nav-link">Deals</span>
+            <span class="nav-link">Sellers</span>
+            <span class="nav-link">Support</span>
+        </div>
+
+        <!-- Header Actions -->
+        <div class="header-actions">
+            <!-- Enhanced Avatar -->
+            <div class="user-avatar" onclick="openProfile()">
+                AK
+            </div>
+
+            <!-- Notification Button -->
+            <button class="notif-btn" onclick="showNotification()">
+                <i class="fas fa-bell"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Side Menu -->
+    <div class="mobile-side-menu" id="mobileSideMenu">
+        <div class="mobile-nav-links">
+            <div class="mobile-nav-link active">Home</div>
+            <div class="mobile-nav-link">Categories</div>
+            <div class="mobile-nav-link">Deals</div>
+            <div class="mobile-nav-link">Sellers</div>
+            <div class="mobile-nav-link">Support</div>
+            <div class="mobile-nav-link">My Orders</div>
+            <div class="mobile-nav-link">Wishlist</div>
+            <div class="mobile-nav-link">Settings</div>
+            <div class="mobile-nav-link" onclick="openChat()">Chat Support</div>
+        </div>
+    </div>
+    
+    <!-- Overlay for mobile menu -->
+    <div class="menu-overlay" id="menuOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- MAIN -->
+    <main class="home-page">
+        <div class="home-shell">
+
+            <!-- Search -->
+            <section class="home-section">
+                <div class="search-shell">
+                    <input class="input-field" type="text"
+                           placeholder="Search products…"
+                           onfocus="this.select();">
+                    <span class="icon">🔍</span>
+                    <button type="button" class="search-chat" onclick="openQuickChat()">
+                        <i class="fas fa-comment-dots"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Banner -->
+            <section class="home-section">
+                <div class="home-banner">
+                    <div class="home-banner-main">
+                        <h3>Ramadan Tech Sale</h3>
+                        <small>Up to 50% OFF on trusted electronics from DZ sellers.</small>
+                        <p class="home-banner-tag">
+                            Curated products picked just for you.
+                        </p>
+                        <div class="home-banner-cta" onclick="showRamadanDeals()">
+                            View deals
+                        </div>
+                    </div>
+                    <div class="home-banner-visual">
+                        <div class="banner-orb">
+                            <div class="banner-orb-inner">🛍️</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categories -->
+            <section class="home-section">
+                <div class="section-header">
+                    <h2 class="section-title">Categories</h2>
+                    <span onclick="showAllCategories()">View all</span>
+                </div>
+                <div class="chips-row" id="categoryRow">
+                    <button class="pill active" data-cat="all">All</button>
+                    <button class="pill" data-cat="phones">Phones</button>
+                    <button class="pill" data-cat="Fashion">Fashion</button>
+                    <button class="pill" data-cat="Beauty">Beauty</button>
+                    <button class="pill" data-cat="watch">Watches</button>
+                    <button class="pill" data-cat="sneakers">Sneakers</button>
+                </div>
+            </section>
+
+            <!-- Popular products -->
+            <section class="home-section">
+                <div class="section-header">
+                    <h2 class="section-title">Popular products</h2>
+                    <span onclick="showAllPopular()">View all</span>
+                </div>
+
+                <div class="card-grid" id="productsGrid">
+                    <!-- Sony XM5 -->
+                    <article class="product-card" data-cat-card="headphones"
+                             onclick="openProduct('Sony XM5', '45,000 DZD', '🎧', 'Verified', '4.8', '120', 'headphones')">
+                        <div class="product-thumb">
+
+                            <span class="discount-badge">-15%</span>
+                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop"
+                                 alt="Sony XM5 Headphones" class="product-image">
+                        </div>
+                        <h3 class="product-title">Sony XM5</h3>
+                        <p class="product-price">45,000 DZD</p>
+                        <div class="product-meta">
+                            <div class="meta-left">
+                                <span class="stars">★★★★★</span>
+                                <span>4.8</span>
+                                <span class="rating-count">(120)</span>
+                            </div>
+                            <div class="meta-right">
+                                <span class="chip-mini verified">✅ Verified</span>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button type="button" class="product-btn glass-btn"
+                                    onclick="event.stopPropagation(); addToWishlist('Sony XM5', this)">
+                                <i class="far fa-heart"></i> Wishlist
+                            </button>
+                            <button type="button" class="product-btn primary"
+                                    onclick="event.stopPropagation();addToCart('Sony XM5', '45,000 DZD')">
+                                <i class="fas fa-shopping-cart"></i> Add to cart
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Smart Watch -->
+                    <article class="product-card" data-cat-card="watch"
+                             onclick="openProduct('Smart Watch', '12,000 DZD', '⌚', 'Verified', '4.5', '80', 'watch')">
+                        <div class="product-thumb">
+
+                            <span class="discount-badge">-20%</span>
+                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop"
+                                 alt="Smart Watch" class="product-image">
+                        </div>
+                        <h3 class="product-title">Smart Watch</h3>
+                        <p class="product-price">12,000 DZD</p>
+                        <div class="product-meta">
+                            <div class="meta-left">
+                                <span class="stars">★★★★☆</span>
+                                <span>4.5</span>
+                                <span class="rating-count">(80)</span>
+                            </div>
+                            <div class="meta-right">
+                                <span class="chip-mini verified">✅ Verified</span>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button type="button" class="product-btn glass-btn"
+                                    onclick="event.stopPropagation(); addToWishlist('Smart Watch', this)">
+                                <i class="far fa-heart"></i> Wishlist
+                            </button>
+                            <button type="button" class="product-btn primary"
+                                    onclick="event.stopPropagation();addToCart('Smart Watch', '12,000 DZD')">
+                                <i class="fas fa-shopping-cart"></i> Add to cart
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Nike Air -->
+                    <article class="product-card" data-cat-card="sneakers"
+                             onclick="openProduct('Nike Air', '18,000 DZD', '👟', 'Verified', '4.6', '95', 'sneakers')">
+                        <div class="product-thumb">
+
+                            <span class="discount-badge">-10%</span>
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop"
+                                 alt="Nike Air Sneakers" class="product-image">
+                        </div>
+                        <h3 class="product-title">Nike Air</h3>
+                        <p class="product-price">18,000 DZD</p>
+                        <div class="product-meta">
+                            <div class="meta-left">
+                                <span class="stars">★★★★☆</span>
+                                <span>4.6</span>
+                                <span class="rating-count">(95)</span>
+                            </div>
+                            <div class="meta-right">
+                                <span class="chip-mini verified">✅ Verified</span>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button type="button" class="product-btn glass-btn"
+                                    onclick="event.stopPropagation(); addToWishlist('Nike Air', this)">
+                                <i class="far fa-heart"></i> Wishlist
+                            </button>
+                            <button type="button" class="product-btn primary"
+                                    onclick="event.stopPropagation();addToCart('Nike Air', '18,000 DZD')">
+                                <i class="fas fa-shopping-cart"></i> Add to cart
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- JBL Go 3 -->
+                    <article class="product-card" data-cat-card="headphones"
+                             onclick="openProduct('JBL Go 3', '7,500 DZD', '🔊', 'Verified', '4.9', '210', 'headphones')">
+                        <div class="product-thumb">
+
+                            <span class="discount-badge">-12%</span>
+                            <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&h=300&fit=crop"
+                                 alt="JBL Speaker" class="product-image">
+                        </div>
+                        <h3 class="product-title">JBL Go 3</h3>
+                        <p class="product-price">7,500 DZD</p>
+                        <div class="product-meta">
+                            <div class="meta-left">
+                                <span class="stars">★★★★★</span>
+                                <span>4.9</span>
+                                <span class="rating-count">(210)</span>
+                            </div>
+                            <div class="meta-right">
+                                <span class="chip-mini verified">✅ Verified</span>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button type="button" class="product-btn glass-btn"
+                                    onclick="event.stopPropagation(); addToWishlist('JBL Go 3', this)">
+                                <i class="far fa-heart"></i> Wishlist
+                            </button>
+                            <button type="button" class="product-btn primary"
+                                    onclick="event.stopPropagation();addToCart('JBL Go 3', '7,500 DZD')">
+                                <i class="fas fa-shopping-cart"></i> Add to cart
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- iPhone 14 Pro -->
+                    <article class="product-card" data-cat-card="phones"
+                             onclick="openProduct('iPhone 14 Pro', '165,000 DZD', '📱', 'Verified', '4.9', '340', 'phones')">
+                        <div class="product-thumb">
+
+                            <span class="discount-badge">-12%</span>
+                            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop"
+                                 alt="iPhone" class="product-image">
+                        </div>
+                        <h3 class="product-title">iPhone 14 Pro</h3>
+                        <p class="product-price">165,000 DZD</p>
+                        <div class="product-meta">
+                            <div class="meta-left">
+                                <span class="stars">★★★★★</span>
+                                <span>4.9</span>
+                                <span class="rating-count">(340)</span>
+                            </div>
+                            <div class="meta-right">
+                                <span class="chip-mini verified">✅ Verified</span>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button type="button" class="product-btn glass-btn"
+                                    onclick="event.stopPropagation(); addToWishlist('iPhone 14 Pro', this)">
+                                <i class="far fa-heart"></i> Wishlist
+                            </button>
+                            <button type="button" class="product-btn primary"
+                                    onclick="event.stopPropagation();addToCart('iPhone 14 Pro', '165,000 DZD')">
+                                <i class="fas fa-shopping-cart"></i> Add to cart
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Samsung A34 -->
+                    <article class="product-card" data-cat-card="phones"
+                             onclick="openProduct('Samsung A34', '59,000 DZD', '📱', 'Verified', '4.4', '140', 'phones')">
+                        <div class="product-thumb">
+
+                            <span class="discount-badge">-8%</span>
+                            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop"
+                                 alt="Samsung Phone" class="product-image">
+                        </div>
+                        <h3 class="product-title">Samsung A34</h3>
+                        <p class="product-price">59,000 DZD</p>
+                        <div class="product-meta">
+                            <div class="meta-left">
+                                <span class="stars">★★★★☆</span>
+                                <span>4.4</span>
+                                <span class="rating-count">(140)</span>
+                            </div>
+                            <div class="meta-right">
+                                <span class="chip-mini verified">✅ Verified</span>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button type="button" class="product-btn glass-btn"
+                                    onclick="event.stopPropagation(); addToWishlist('Samsung A34', this)">
+                                <i class="far fa-heart"></i> Wishlist
+                            </button>
+                            <button type="button" class="product-btn primary"
+                                    onclick="event.stopPropagation();addToCart('Samsung A34', '59,000 DZD')">
+                                <i class="fas fa-shopping-cart"></i> Add to cart
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Adidas Run -->
+                    <article class="product-card" data-cat-card="sneakers"
+                             onclick="openProduct('Adidas Run', '15,000 DZD', '👟', 'Verified', '4.3', '60', 'sneakers')">
+                        <div class="product-thumb">
+                                                        <span class="discount-badge">-10%</span>
+                            <img src="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?w=400&h=300&fit=crop"
+                                 alt="Adidas Sneakers" class="product-image">
+                        </div>
+                        <h3 class="product-title">Adidas Run</h3>
+                        <p class="product-price">15,000 DZD</p>
+                        <div class="product-meta">
+                            <div class="meta-left">
+                                <span class="stars">★★★★☆</span>
+                                <span>4.3</span>
+                                <span class="rating-count">(60)</span>
+                            </div>
+                            <div class="meta-right">
+                                <span class="chip-mini verified">✅ Verified</span>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button type="button" class="product-btn glass-btn"
+                                    onclick="event.stopPropagation(); addToWishlist('Adidas Run', this)">
+                                <i class="far fa-heart"></i> Wishlist
+                            </button>
+                            <button type="button" class="product-btn primary"
+                                    onclick="event.stopPropagation();addToCart('Adidas Run', '15,000 DZD')">
+                                <i class="fas fa-shopping-cart"></i> Add to cart
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- FitBand Pro -->
+                    <article class="product-card" data-cat-card="watch"
+                             onclick="openProduct('FitBand Pro', '9,500 DZD', '🏃', 'Verified', '4.4', '110', 'watch')">
+                        <div class="product-thumb">
+                                                        <span class="discount-badge">-6%</span>
+                            <img src="https://images.unsplash.com/photo-1579586337278-3f7b879ebad4?w=400&h=300&fit=crop"
+                                 alt="Fitness Band" class="product-image">
+                        </div>
+                        <h3 class="product-title">FitBand Pro</h3>
+                        <p class="product-price">9,500 DZD</p>
+                        <div class="product-meta">
+                            <div class="meta-left">
+                                <span class="stars">★★★★☆</span>
+                                <span>4.4</span>
+                                <span class="rating-count">(110)</span>
+                            </div>
+                            <div class="meta-right">
+                                <span class="chip-mini verified">✅ Verified</span>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button type="button" class="product-btn glass-btn"
+                                    onclick="event.stopPropagation(); addToWishlist('FitBand Pro', this)">
+                                <i class="far fa-heart"></i> Wishlist
+                            </button>
+                            <button type="button" class="product-btn primary"
+                                    onclick="event.stopPropagation();addToCart('FitBand Pro', '9,500 DZD')">
+                                <i class="fas fa-shopping-cart"></i> Add to cart
+                            </button>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Trust DZ -->
+            <section class="home-section trustdz-section">
+                <div class="trustdz-card">
+                    <div class="trustdz-header">
+                        <div class="trustdz-icon">✅</div>
+                        <div>
+                            <div class="trustdz-title">Trust DZ protection</div>
+                            <div class="trustdz-status">Enabled on featured and verified products</div>
+                        </div>
+                    </div>
+                    <p class="trustdz-text">
+                        SmartBazaar verifies sellers, monitors orders, and keeps your payments safer across Algeria.
+                    </p>
+                    <div class="trustdz-meter">
+                        <div class="trustdz-meter-fill"></div>
+                    </div>
+                    <div class="trustdz-bottom">
+                        <span class="trustdz-note">Current trust score for this selection: <strong>82%</strong></span>
+                        <button class="trustdz-btn" type="button" onclick="showTrustDetails()">
+                            Check seller trust
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+</div>
+
+<!-- Floating buttons -->
+<div class="floating-actions">
+    <button class="fab-btn fab-chat" type="button" onclick="openChat()">
+        <i class="fas fa-robot"></i>
+        <span>Chat now</span>
+    </button>
+    <button class="fab-btn fab-cart" type="button" onclick="viewCart()">
+        <i class="fas fa-shopping-cart"></i>
+        <span>View cart</span>
+    </button>
+</div>
+
+<!-- Product Popup -->
+<div id="productModal" class="modal-backdrop">
+    <div class="modal-card">
+        <div id="modalEmoji" class="modal-emoji">🎧</div>
+        <div id="modalTitle" class="modal-title">Sony XM5</div>
+        <div id="modalPrice" class="modal-price">45,000 DZD</div>
+        <div class="modal-text">
+            Authentic product from trusted DZ sellers. Add it to your wishlist or cart in the next step.
+        </div>
+        <button type="button" class="modal-btn" onclick="closeProductModal()">Continue shopping</button>
+    </div>
+</div>
+
+<script>
+    // Mobile menu functionality
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileSideMenu');
+        const overlay = document.getElementById('menuOverlay');
+        menu.classList.toggle('active');
+        overlay.classList.toggle('active');
+    }
+
+    function closeMobileMenu() {
+        const menu = document.getElementById('mobileSideMenu');
+        const overlay = document.getElementById('menuOverlay');
+        menu.classList.remove('active');
+        overlay.classList.remove('active');
+    }
+
+    // تصفية الفئات
+    const catRow = document.getElementById('categoryRow');
+    const productCards = document.querySelectorAll('[data-cat-card]');
+
+    if(catRow){
+        catRow.addEventListener('click', e=>{
+            if(!e.target.matches('.pill')) return;
+            const category = e.target.getAttribute('data-cat');
+
+            catRow.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+            e.target.classList.add('active');
+
+            productCards.forEach(card=>{
+                const cardCat = card.getAttribute('data-cat-card');
+                card.style.display =
+                    (category === 'all' || category === cardCat) ? '' : 'none';
+            });
+        });
+    }
+
+    // دالة فتح صفحة المنتج
+    function openProduct(title, price, emoji, badge, rating, reviews, category) {
+        // تخزين بيانات المنتج في localStorage
+        const productData = {
+            title: title,
+            price: price,
+            emoji: emoji,
+            badge: badge || 'Verified',
+            rating: rating || '4.8',
+            reviews: reviews || '120',
+            category: category || 'headphones'
+        };
+        
+        localStorage.setItem('selectedProduct', JSON.stringify(productData));
+        
+        // الانتقال إلى صفحة تفاصيل المنتج
+        window.location.href = 'prFINAL.html';
+    }
+
+    // Utility functions
+    function openChat() {
+        alert('Opening AI Chat Assistant...\nHow can I help you today?');
+    }
+
+    function openQuickChat() {
+        alert('Quick chat opened! Ask me about products, shipping, or support.');
+    }
+
+    function showNotification() {
+        alert('🔔 You have 3 new notifications\n• Order #1234 shipped\n• Ramadan sale starts tomorrow\n• New message from seller');
+    }
+
+    function openProfile() {
+        alert('Opening your profile...');
+    }
+
+    // Enhanced wishlist function
+    function addToWishlist(productName, btn) {
+        btn.classList.toggle('wishlist-active');
+        const isActive = btn.classList.contains('wishlist-active');
+        alert(`${isActive ? '❤️ Added' : 'Removed'} "${productName}" ${isActive ? 'to' : 'from'} your wishlist!`);
+    }
+
+    function addToCart(productName, price) {
+        alert(`🛒 Added "${productName}" to your cart!\nPrice: ${price}`);
+    }
+
+    function showRamadanDeals() {
+        alert('Showing curated Ramadan deals with up to 50% OFF!');
+    }
+
+    function showAllCategories() {
+        alert('Showing all categories...');
+    }
+
+    function showAllPopular() {
+        alert('Showing all popular products...');
+    }
+
+    function showTrustDetails() {
+        alert('Trust DZ Protection:\n• Seller verification\n• Order monitoring\n• Secure payments\n• Money-back guarantee');
+    }
+
+    function viewCart() {
+        alert('Opening your shopping cart...');
+    }
+
+    function closeProductModal() {
+        document.getElementById('productModal').classList.remove('show');
+    }
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            closeMobileMenu();
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>517</width>
+    <height>823</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>SmartBazaar – Sign in</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+QMainWindow {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                stop:0 #F4EFFF,
+                                stop:1 #EAE4FF);
+}
+   </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">
+#centralwidget {
+    background: transparent;
+}
+
+/* شريط التوهج تحت الأعلى */
+#frame_heroAccent {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                                stop:0 transparent,
+                                stop:0.25 rgba(123, 47, 247, 0.6),
+                                stop:0.5 rgba(241, 7, 163, 0.8),
+                                stop:0.75 rgba(123, 47, 247, 0.6),
+                                stop:1 transparent);
+    border-radius: 4px;
+}
+
+/* البادج - خلفية شفافة */
+#label_heroBadge {
+    background: transparent;
+    color: #7B2FF7;
+    border-radius: 999px;
+    padding: 6px 18px;
+    font-size: 11px;
+    font-weight: 600;
+    border: 1.5px solid rgba(123, 47, 247, 0.2);
+}
+
+/* عنوان الهيرو - بلونين فقط */
+#label_heroTitle {
+    font-size: 26px;
+    font-weight: 800;
+    color: #7B2FF7;
+    letter-spacing: -0.5px;
+    padding: 5px 0;
+}
+
+/* وصف الهيرو */
+#label_heroSubtitle {
+    color: #6B6685;
+    font-size: 13px;
+    line-height: 1.4;
+    opacity: 0.9;
+}
+
+/* الكارد الزجاجية */
+#frame_card {
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px rgba(123, 47, 247, 0.08),
+                0 2px 4px rgba(123, 47, 247, 0.04);
+}
+
+/* حقول الإدخال */
+QLineEdit {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 18px;
+    border: 1.5px solid rgba(155, 132, 222, 0.2);
+    padding: 10px 20px;
+    font-size: 13px;
+    color: #1F1638;
+    selection-background-color: rgba(123, 47, 247, 0.2);
+    selection-color: #1F1638;
+}
+QLineEdit:hover {
+    border: 1.5px solid rgba(123, 47, 247, 0.3);
+    background-color: rgba(255, 255, 255, 0.95);
+}
+QLineEdit:focus {
+    border: 1.5px solid #7B2FF7;
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(123, 47, 247, 0.1);
+}
+
+/* تذكّرني */
+QCheckBox {
+    color: #6B6685;
+    font-size: 12px;
+    spacing: 8px;
+}
+QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1.5px solid rgba(123, 47, 247, 0.3);
+    background: white;
+}
+QCheckBox::indicator:checked {
+    background-color: #7B2FF7;
+    border: 1.5px solid #7B2FF7;
+}
+
+/* زر نسيت كلمة المرور */
+#pushButton_forgot {
+    border: none;
+    background: transparent;
+    color: #7B2FF7;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+#pushButton_forgot:hover {
+    background: rgba(123, 47, 247, 0.05);
+}
+
+/* رسائل الخطأ */
+#errorEmail, #errorPassword {
+    color: #FF3B30;
+    font-size: 11px;
+    padding-left: 4px;
+    font-weight: 500;
+}
+
+/* زر Sign in الأساسي */
+#pushButton_login {
+    border: none;
+    border-radius: 20px;
+    padding: 12px 24px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                                stop:0 #7B2FF7,
+                                stop:1 #F107A3);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+#pushButton_login:hover {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                                stop:0 #8B3DFF,
+                                stop:1 #FF1AA3);
+}
+
+/* زر Create account */
+#pushButton_createAccount {
+    border-radius: 20px;
+    padding: 10px 24px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1.5px solid rgba(123, 47, 247, 0.15);
+    color: #1F1638;
+    font-size: 13px;
+    font-weight: 600;
+}
+#pushButton_createAccount:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1.5px solid rgba(123, 47, 247, 0.3);
+}
+
+/* أزرار السوشيال */
+#pushButton_facebook, #pushButton_google {
+    border-radius: 18px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    font-size: 12px;
+    font-weight: 600;
+}
+#pushButton_facebook {
+    color: #1877F2;
+    border-color: rgba(24, 119, 242, 0.25);
+}
+#pushButton_facebook:hover {
+    background: rgba(24, 119, 242, 0.05);
+    border-color: rgba(24, 119, 242, 0.4);
+}
+#pushButton_google {
+    color: #EA4335;
+    border-color: rgba(234, 67, 53, 0.25);
+}
+#pushButton_google:hover {
+    background: rgba(234, 67, 53, 0.05);
+    border-color: rgba(234, 67, 53, 0.4);
+}
+
+/* نص إضافي */
+#label_or {
+    color: #8B86AA;
+    font-size: 12px;
+    letter-spacing: 1px;
+    opacity: 0.7;
+}
+
+/* تسميات الحقول */
+#label_email, #label_password {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1F1638;
+    padding-left: 4px;
+}
+    </string>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_main">
+    <property name="spacing">
+     <number>22</number>
+    </property>
+    <property name="leftMargin">
+     <number>24</number>
+    </property>
+    <property name="topMargin">
+     <number>28</number>
+    </property>
+    <property name="rightMargin">
+     <number>24</number>
+    </property>
+    <property name="bottomMargin">
+     <number>28</number>
+    </property>
+    <item>
+     <widget class="QFrame" name="frame_heroAccent">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>6</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>6</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_hero">
+      <property name="spacing">
+       <number>10</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>10</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>10</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label_heroBadge">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>✨ Welcome back · SmartBazaar</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_heroTitle">
+        <property name="text">
+         <string>Sign in to your account</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_heroSubtitle">
+        <property name="text">
+         <string>Access your SmartBazaar dashboard — orders, favorites and verified DZ sellers.</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame_card">
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_card">
+       <property name="spacing">
+        <number>18</number>
+       </property>
+       <property name="leftMargin">
+        <number>24</number>
+       </property>
+       <property name="topMargin">
+        <number>24</number>
+       </property>
+       <property name="rightMargin">
+        <number>24</number>
+       </property>
+       <property name="bottomMargin">
+        <number>24</number>
+       </property>
+       <item>
+        <layout class="QFormLayout" name="formLayout">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetMinimumSize</enum>
+         </property>
+         <property name="rowWrapPolicy">
+          <enum>QFormLayout::WrapLongRows</enum>
+         </property>
+         <property name="labelAlignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <property name="formAlignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="horizontalSpacing">
+          <number>12</number>
+         </property>
+         <property name="verticalSpacing">
+          <number>16</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_email">
+           <property name="text">
+            <string>• Email Address</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0" colspan="2">
+          <widget class="QLineEdit" name="lineEdit_email">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>38</height>
+            </size>
+           </property>
+           <property name="placeholderText">
+            <string>email@example.com</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_password">
+           <property name="text">
+            <string>• Password</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0" colspan="2">
+          <widget class="QLineEdit" name="lineEdit_password">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>38</height>
+            </size>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
+           </property>
+           <property name="placeholderText">
+            <string>Your password</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="layout_extraRow">
+         <property name="spacing">
+          <number>8</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="checkBox_remember">
+           <property name="text">
+            <string>Remember me</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_forgot">
+           <property name="text">
+            <string>Forgot password?</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="layout_actions">
+         <property name="spacing">
+          <number>14</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="pushButton_login">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>44</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Sign in</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_createAccount">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Create account instead</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_or">
+           <property name="text">
+            <string>OR CONTINUE WITH</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="layout_social">
+           <property name="spacing">
+            <number>12</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="pushButton_facebook">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>38</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Continue with Facebook</string>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>fb.png</normaloff>fb.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_google">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>38</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Continue with Google</string>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>go.png</normaloff>go.png</iconset>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
