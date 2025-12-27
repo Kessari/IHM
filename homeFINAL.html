@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,6 +105,71 @@
         position:relative;
     }
 
+    /* ===== TOAST NOTIFICATIONS ===== */
+    .toast-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .toast {
+        min-width: 300px;
+        max-width: 400px;
+        padding: 16px 20px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(14px) saturate(160%);
+        -webkit-backdrop-filter: blur(14px) saturate(160%);
+        border: 1px solid rgba(123,47,247,0.25);
+        box-shadow: 0 14px 32px rgba(123,47,247,0.25);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transform: translateX(400px);
+        transition: transform 0.3s ease;
+    }
+
+    .toast.show {
+        transform: translateX(0);
+    }
+
+    .toast-icon {
+        font-size: 24px;
+    }
+
+    .toast-content {
+        flex: 1;
+    }
+
+    .toast-title {
+        font-size: var(--text-sm);
+        font-weight: 600;
+        color: var(--text-main);
+    }
+
+    .toast-message {
+        font-size: var(--text-xs);
+        color: var(--text-muted);
+    }
+
+    .toast-close {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(123,47,247,0.1);
+        color: var(--accent-start);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+    }
+
     /* ===== UNIFIED HEADER ===== */
     .main-header {
         height: 70px;
@@ -119,11 +185,10 @@
         -webkit-backdrop-filter: blur(16px) saturate(160%);
     }
 
-    /* Desktop Header Layout */
+    /* Desktop Header Layout - ENHANCED LOGO */
     @media (min-width: 900px) {
         .main-header {
-            justify-content: space-between; /* Center the logo */
-            position: relative;
+            justify-content: space-between;
         }
        
         /* Left: Navigation links */
@@ -132,12 +197,37 @@
             left: 40px;
             display: flex;
         }
-        /* Center: Logo */
+        
+        /* Center: Full logo bar */
         .logo-section {
-    position: static;
-    transform: none;
-    margin: 0 auto;
-}
+            position: static;
+            transform: none;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(14px) saturate(160%);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
+            border-radius: 999px;
+            border: 1px solid rgba(123,47,247,0.25);
+            box-shadow: 0 8px 20px rgba(123,47,247,0.2);
+        }
+        
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            font-size: 20px;
+            box-shadow: 0 8px 20px rgba(123,47,247,0.4);
+        }
+        
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
         /* Right: Actions */
         .header-actions {
             position: absolute;
@@ -159,7 +249,7 @@
     @media (max-width: 899px) {
         .main-header {
             padding: 0 15px;
-            justify-content: space-between; /* For mobile: left, center, right */
+            justify-content: space-between;
         }
         /* Left: Categories button */
         .mobile-header-left {
@@ -190,7 +280,7 @@
             transform: none;
         }
         .logo-text {
-            font-size: 1.1rem; /* Smaller logo on mobile */
+            font-size: 1.1rem;
         }
         .logo-icon {
             width: 32px;
@@ -208,7 +298,7 @@
             display: none !important;
         }
         .mobile-menu-btn {
-            display: none; /* Hide old menu button */
+            display: none;
         }
     }
 
@@ -229,7 +319,7 @@
     .logo-section {
         display: flex;
         align-items: center;
-        gap: 8px; /* Reduced gap */
+        gap: 8px;
     }
 
     .logo-icon {
@@ -301,7 +391,7 @@
     .header-actions {
         display: flex;
         align-items: center;
-        gap: 12px; /* Reduced gap */
+        gap: 12px;
     }
 
     /* Notification Button - Simplified */
@@ -431,7 +521,7 @@
     }
 
     .home-section{
-        margin-top:40px; /* Increased spacing */
+        margin-top:40px;
     }
     .home-section:first-of-type{
         margin-top:0;
@@ -451,7 +541,7 @@
         color:var(--text-main);
         font-size:var(--text-sm);
         outline:none;
-        box-shadow:0 8px 20px rgba(197,181,255,0.4); /* Lighter shadow */
+        box-shadow:0 8px 20px rgba(197,181,255,0.4);
     }
     .search-shell input::placeholder{
         color:#a5a0d8;
@@ -488,24 +578,42 @@
         box-shadow:0 8px 18px rgba(241,7,163,0.55);
     }
 
-    /* ===== Banner ===== */
+    /* ===== Banner - WITH RAMADAN IMAGE ===== */
     .home-banner{
         border-radius:var(--radius-lg);
         padding:20px 22px 18px;
         background:
-            radial-gradient(circle at top left,
-                rgba(123,47,247,0.16),
-                rgba(241,7,163,0.12),
-                rgba(255,255,255,0.95));
+            linear-gradient(135deg, 
+                rgba(123,47,247,0.12), 
+                rgba(241,7,163,0.08)), 
+            url('https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=1200&h=400&fit=crop&auto=format&q=80');
+        background-size: cover;
+        background-position: center;
         color:var(--text-main);
-        box-shadow:0 10px 25px rgba(148,140,200,0.4); /* Softer shadow */
-        margin-bottom:40px; /* Increased spacing */
+        box-shadow:0 10px 25px rgba(148,140,200,0.4);
+        margin-bottom:40px;
         position:relative;
         overflow:hidden;
         display:grid;
         grid-template-columns:minmax(0,2.2fr) minmax(0,1.2fr);
         gap:20px;
         border:1px solid var(--glass-border);
+    }
+    ..home-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(15,7,40,0.55) 0%,
+        rgba(15,7,40,0.35) 50%,
+        rgba(15,7,40,0.15) 100%
+    );
+    z-index: 0;
+}
+    .home-banner-main {
+        position: relative;
+        z-index: 1;
     }
     .home-banner-main h3{
         font-size:var(--text-2xl);
@@ -536,6 +644,7 @@
         cursor:pointer;
         box-shadow:0 10px 24px rgba(148,140,200,0.6);
         border:1px solid rgba(230,225,255,0.9);
+        transition: all 0.2s;
     }
     .home-banner-cta:hover{
         transform:translateY(-2px);
@@ -545,6 +654,8 @@
         display:flex;
         align-items:center;
         justify-content:center;
+        position: relative;
+        z-index: 1;
     }
     .banner-orb{
         width:104px;
@@ -556,8 +667,7 @@
             rgba(250,204,21,1),
             rgba(56,189,248,1));
         padding:3px;
-        box-shadow:0 12px 30px rgba(148,140,200,0.5); /* Softer shadow */
-        /* ❌ REMOVED SPINNING ANIMATION */
+        box-shadow:0 12px 30px rgba(148,140,200,0.5);
     }
     .banner-orb-inner{
         width:100%;
@@ -647,7 +757,7 @@
         color:#FDF4FF;
         border-color:transparent;
         box-shadow:0 14px 30px rgba(123,47,247,0.7);
-        backdrop-filter:none;
+ backdrop-filter:none;
     }
     .pill.active::before{
         color:#FACC15;
@@ -694,7 +804,7 @@
         pointer-events:none;
     }
     .product-card:hover{
-        transform:translateY(-4px); /* Lighter hover */
+        transform:translateY(-4px);
         box-shadow:0 20px 40px rgba(148,140,200,0.5);
     }
     .product-card:hover::after{
@@ -731,7 +841,7 @@
         z-index:2;
     }
 
-    /* Discount Badge - NEW */
+    /* Discount Badge */
     .discount-badge {
         position: absolute;
         top: 10px;
@@ -855,14 +965,14 @@
 
     /* ===== Trust DZ ===== */
     .trustdz-section{
-        margin-top:48px; /* Larger spacing */
+        margin-top:48px;
     }
     .trustdz-card{
         border-radius:24px;
         padding:20px 22px;
         background:rgba(255,255,255,0.98);
         border:1px solid rgba(230,225,255,0.95);
-        box-shadow:0 12px 28px rgba(148,140,200,0.35); /* Softer shadow */
+        box-shadow:0 12px 28px rgba(148,140,200,0.35);
         display:flex;
         flex-direction:column;
         gap:14px;
@@ -1042,6 +1152,9 @@
 
 <div class="mobile-app">
 
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div class="toast-container" id="toastContainer"></div>
+
     <!-- UNIFIED HEADER -->
     <header class="main-header">
         <!-- Mobile: Categories button (left) -->
@@ -1164,7 +1277,6 @@
                     <article class="product-card" data-cat-card="headphones"
                              onclick="openProduct('Sony XM5', '45,000 DZD', '🎧', 'Verified', '4.8', '120', 'headphones')">
                         <div class="product-thumb">
-
                             <span class="discount-badge">-15%</span>
                             <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop"
                                  alt="Sony XM5 Headphones" class="product-image">
@@ -1197,7 +1309,6 @@
                     <article class="product-card" data-cat-card="watch"
                              onclick="openProduct('Smart Watch', '12,000 DZD', '⌚', 'Verified', '4.5', '80', 'watch')">
                         <div class="product-thumb">
-
                             <span class="discount-badge">-20%</span>
                             <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop"
                                  alt="Smart Watch" class="product-image">
@@ -1230,7 +1341,6 @@
                     <article class="product-card" data-cat-card="sneakers"
                              onclick="openProduct('Nike Air', '18,000 DZD', '👟', 'Verified', '4.6', '95', 'sneakers')">
                         <div class="product-thumb">
-
                             <span class="discount-badge">-10%</span>
                             <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop"
                                  alt="Nike Air Sneakers" class="product-image">
@@ -1263,7 +1373,6 @@
                     <article class="product-card" data-cat-card="headphones"
                              onclick="openProduct('JBL Go 3', '7,500 DZD', '🔊', 'Verified', '4.9', '210', 'headphones')">
                         <div class="product-thumb">
-
                             <span class="discount-badge">-12%</span>
                             <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&h=300&fit=crop"
                                  alt="JBL Speaker" class="product-image">
@@ -1296,7 +1405,6 @@
                     <article class="product-card" data-cat-card="phones"
                              onclick="openProduct('iPhone 14 Pro', '165,000 DZD', '📱', 'Verified', '4.9', '340', 'phones')">
                         <div class="product-thumb">
-
                             <span class="discount-badge">-12%</span>
                             <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop"
                                  alt="iPhone" class="product-image">
@@ -1329,7 +1437,6 @@
                     <article class="product-card" data-cat-card="phones"
                              onclick="openProduct('Samsung A34', '59,000 DZD', '📱', 'Verified', '4.4', '140', 'phones')">
                         <div class="product-thumb">
-
                             <span class="discount-badge">-8%</span>
                             <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop"
                                  alt="Samsung Phone" class="product-image">
@@ -1362,7 +1469,7 @@
                     <article class="product-card" data-cat-card="sneakers"
                              onclick="openProduct('Adidas Run', '15,000 DZD', '👟', 'Verified', '4.3', '60', 'sneakers')">
                         <div class="product-thumb">
-                                                        <span class="discount-badge">-10%</span>
+                            <span class="discount-badge">-10%</span>
                             <img src="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?w=400&h=300&fit=crop"
                                  alt="Adidas Sneakers" class="product-image">
                         </div>
@@ -1390,12 +1497,12 @@
                         </div>
                     </article>
 
-                    <!-- FitBand Pro -->
+                    <!-- FitBand Pro - FIXED IMAGE -->
                     <article class="product-card" data-cat-card="watch"
                              onclick="openProduct('FitBand Pro', '9,500 DZD', '🏃', 'Verified', '4.4', '110', 'watch')">
                         <div class="product-thumb">
-                                                        <span class="discount-badge">-6%</span>
-                            <img src="https://images.unsplash.com/photo-1579586337278-3f7b879ebad4?w=400&h=300&fit=crop"
+                            <span class="discount-badge">-6%</span>
+                            <img src="https://images.unsplash.com/photo-1583394293214-28c7b36cd3da?w=400&h=300&fit=crop"
                                  alt="Fitness Band" class="product-image">
                         </div>
                         <h3 class="product-title">FitBand Pro</h3>
@@ -1479,6 +1586,35 @@
 </div>
 
 <script>
+    // TOAST NOTIFICATION SYSTEM
+    function showToast(title, message, icon = '✅') {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        
+        toast.innerHTML = `
+            <div class="toast-icon">${icon}</div>
+            <div class="toast-content">
+                <div class="toast-title">${title}</div>
+                <div class="toast-message">${message}</div>
+            </div>
+            <button class="toast-close" onclick="this.parentElement.remove()">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        
+        container.appendChild(toast);
+        
+        // Trigger animation
+        setTimeout(() => toast.classList.add('show'), 10);
+        
+        // Auto-remove after 4 seconds
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 300);
+        }, 4000);
+    }
+
     // Mobile menu functionality
     function toggleMobileMenu() {
         const menu = document.getElementById('mobileSideMenu');
@@ -1535,50 +1671,70 @@
 
     // Utility functions
     function openChat() {
-        alert('Opening AI Chat Assistant...\nHow can I help you today?');
+        showToast('Chat Assistant', 'How can I help you today?', '🤖');
     }
 
     function openQuickChat() {
-        alert('Quick chat opened! Ask me about products, shipping, or support.');
+        showToast('Quick Chat', 'Ask me about products, shipping, or support.', '💬');
     }
 
     function showNotification() {
-        alert('🔔 You have 3 new notifications\n• Order #1234 shipped\n• Ramadan sale starts tomorrow\n• New message from seller');
+        showToast('3 New Notifications', 
+            '• Order #1234 shipped\n• Ramadan sale starts tomorrow\n• New message from seller', 
+            '🔔');
     }
 
     function openProfile() {
-        alert('Opening your profile...');
+        showToast('Profile', 'Opening your profile...', '👤');
     }
 
-    // Enhanced wishlist function
+    // Enhanced wishlist function with TOAST
     function addToWishlist(productName, btn) {
         btn.classList.toggle('wishlist-active');
         const isActive = btn.classList.contains('wishlist-active');
-        alert(`${isActive ? '❤️ Added' : 'Removed'} "${productName}" ${isActive ? 'to' : 'from'} your wishlist!`);
+        
+        if (isActive) {
+            btn.innerHTML = '<i class="fas fa-heart"></i> Added';
+            showToast('Added to Wishlist', `"${productName}" saved to your wishlist`, '❤️');
+        } else {
+            btn.innerHTML = '<i class="far fa-heart"></i> Wishlist';
+            showToast('Removed from Wishlist', `"${productName}" removed from wishlist`, '💔');
+        }
+        
+        // Reset button text after 2 seconds
+        setTimeout(() => {
+            if (btn.classList.contains('wishlist-active')) {
+                btn.innerHTML = '<i class="fas fa-heart"></i> Wishlist';
+            } else {
+                btn.innerHTML = '<i class="far fa-heart"></i> Wishlist';
+            }
+        }, 2000);
     }
 
     function addToCart(productName, price) {
-        alert(`🛒 Added "${productName}" to your cart!\nPrice: ${price}`);
+        showToast('Added to Cart', `"${productName}" added to cart! (${price})`, '🛒');
     }
 
     function showRamadanDeals() {
-        alert('Showing curated Ramadan deals with up to 50% OFF!');
+        showToast('Ramadan Deals', 'Showing curated deals with up to 50% OFF!', '🎁');
     }
 
     function showAllCategories() {
-        alert('Showing all categories...');
+        showToast('Categories', 'Showing all categories...', '📋');
     }
 
     function showAllPopular() {
-        alert('Showing all popular products...');
+        showToast('Popular Products', 'Showing all popular products...', '🔥');
     }
 
     function showTrustDetails() {
-        alert('Trust DZ Protection:\n• Seller verification\n• Order monitoring\n• Secure payments\n• Money-back guarantee');
+        showToast('Trust DZ Protection', 
+            '• Seller verification\n• Order monitoring\n• Secure payments\n• Money-back guarantee', 
+            '✅');
     }
 
     function viewCart() {
-        alert('Opening your shopping cart...');
+        showToast('Shopping Cart', 'Opening your cart...', '🛒');
     }
 
     function closeProductModal() {
